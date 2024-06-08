@@ -1,16 +1,18 @@
+/** Класс-запись */
 class Record {
     constructor(title, description) {
-        this.title = title;
-        this.description = description;
-        this.creationTime = new Date().toISOString();
-        this.modificationTime = new Date().toISOString();
-        this.isCompleted = false;
+        this.title = title; // Заголовок
+        this.description = description; // Описание
+        this.creationTime = new Date().toISOString(); // Время создания
+        this.modificationTime = new Date().toISOString(); // Время изменения
+        this.isCompleted = false; // Маркер выполнения
     }
 }
 
+/** Класс для работы с записями */
 class RecordManager {
     constructor() {
-        this.recordsKey = 'records';
+        this.recordsKey = 'Records';
         this.loadRecords();
     }
 
@@ -42,7 +44,7 @@ class RecordManager {
         return this.records[title];
     }
 
-    updateRecord(title, newDescription, isCompleted) {
+    changeRecord(title, newDescription, isCompleted) {
         const record = this.records[title];
         if (record) {
             record.description = newDescription;
@@ -53,18 +55,18 @@ class RecordManager {
     }
 }
 
-// Example usage:
+// Пример использования
 const manager = new RecordManager();
 manager.addRecord("Спорт", "Утренняя пробежка");
 manager.addRecord("Бизнес-встреча", "Обсуждение новых векторов развития фирмы");
-manager.addRecord("Друзья", "Идём с моим лучшим другом на футбольный матч");
+manager.addRecord("Друзья", "Идём с лучшим другом на футбольный матч");
 
 console.log('Список записей: ', manager.getAllRecords());
 
 const meetingRecord = manager.getRecord('Бизнес-встреча');
 console.log('Запись о бизнес-встрече: ', meetingRecord);
 
-manager.updateRecord('Спорт', 'Утренняя пробежка и отжимания', true);
+manager.changeRecord('Спорт', 'Утренняя пробежка и отжимания', true);
 console.log('Обновлённая запись о спорте: ', manager.getRecord('Спорт'));
 
 manager.removeRecord('Друзья');
